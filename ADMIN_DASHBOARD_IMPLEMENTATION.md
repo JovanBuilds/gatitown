@@ -86,8 +86,8 @@
    - Ve el formulario de login
 
 3. **Ingresa credenciales**
-   - Email: `jovansolis.dev@gmail.com`
-   - Password: `ChangeMe_Jovan_Admin_2025`
+   - Email:
+   - Password:
 
 4. **Login exitoso**
    - Redirige a `/admin`
@@ -124,10 +124,10 @@
 ## 🔐 Credenciales de Acceso
 
 ### Admin Principal (JovanS):
-- **Email**: jovansolis.dev@gmail.com
-- **Password**: ChangeMe_Jovan_Admin_2025
-- **Role**: ADMIN
-- **Avatar**: /images/admin/jovan-avatar.jpg
+- **Email**: 
+- **Password**: 
+- **Role**:
+- **Avatar**: /images/admin/avatar.jpg
 
 ### Admin Genérico:
 - **Email**: admin@gatitown.com
