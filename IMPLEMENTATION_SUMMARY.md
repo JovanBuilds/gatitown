@@ -18,22 +18,22 @@
 
 ### Archivos Modificados:
 - ✅ `prisma/schema.prisma` - Campo avatarUrl agregado
-- ✅ `prisma/seed.ts` - Usuario JovanS agregado
+- ✅ `prisma/seed.ts` - Usuario agregado
 - ✅ `src/pages/admin/index.astro` - Rutas corregidas
 
 ### Usuario Admin Principal:
-- **Email**: jovansolis.dev@gmail.com
-- **Nombre**: Jovan Solis
-- **Password**: ChangeMe_Jovan_Admin_2025
-- **Role**: ADMIN
-- **Avatar**: /images/admin/jovan-avatar.jpg
-- **Teléfono**: 6646703603 (referencia en código)
+- **Email**:
+- **Nombre**: 
+- **Password**:
+- **Role**: 
+- **Avatar**: /images/admin/avatar.jpg
+- **Teléfono**: 6641234568 (referencia en código)
 
 ## 🧪 Pruebas Realizadas
 
 1. ✅ Servidor de desarrollo iniciado correctamente
 2. ✅ Formulario público muestra input de archivo
-3. ✅ Login de JovanS funciona correctamente
+3. ✅ Login funciona correctamente
 4. ✅ Página de admin carga sin errores
 5. ✅ Seed script ejecutado exitosamente
 
@@ -44,8 +44,8 @@
 - Password: adminpassword
 
 ### Admin Principal (JovanS):
-- Email: jovansolis.dev@gmail.com  
-- Password: ChangeMe_Jovan_Admin_2025
+- Email:   
+- Password: 
 
 ## 🚀 Próximos Pasos Sugeridos
 
