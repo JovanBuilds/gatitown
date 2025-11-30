@@ -1,0 +1,93 @@
+import type { APIRoute } from "astro";
+import { prisma } from "../../../../../lib/prisma";
+import { lucia } from "../../../../../lib/auth";
+import { z } from "zod";
+
+const AdoptionStatusSchema = z.object({
+    adoptionStatus: z.enum(["AVAILABLE", "RESERVED", "ADOPTED"])
+});
+
+export const PATCH: APIRoute = async ({ params, request, cookies }) => {
+    const sessionId = cookies.get(lucia.sessionCookieName)?.value ?? null;
+
+    if (!sessionId) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+            status: 401,
+            headers: { "Content-Type": "application/json" }
+        });
+    }
+
+    const { session, user } = await lucia.validateSession(sessionId);
+
+    if (!session || user.role !== "ADMIN") {
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+            status: 403,
+            headers: { "Content-Type": "application/json" }
+        });
+    }
+
+    const catId = params.id;
+
+    if (!catId) {
+        return new Response(JSON.stringify({ error: "Cat ID is required" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" }
+        });
+    }
+
+    try {
+        const body = await request.json();
+        const { adoptionStatus } = AdoptionStatusSchema.parse(body);
+
+        const updatedCat = await prisma.cat.update({
+            where: { id: catId },
+            data: {
+                adoptionStatus
+            },
+            include: {
+                photos: true
+            }
+        });
+
+        return new Response(
+            JSON.stringify({
+                message: "Adoption status updated successfully",
+                cat: updatedCat
+            }),
+            {
+                status: 200,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            return new Response(
+                JSON.stringify({
+                    error: "Validation failed",
+                    details: error.issues
+                }),
+                {
+                    status: 400,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+        }
+
+        console.error("Error updating adoption status:", error);
+        return new Response(
+            JSON.stringify({
+                error: "Internal server error"
+            }),
+            {
+                status: 500,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+    }
+};

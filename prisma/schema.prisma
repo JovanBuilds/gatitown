@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id       String    @id @default(cuid())
+  email    String    @unique
+  name     String
+  hashed_password String
+  role     String    @default("VISITOR")
+  avatarUrl String?
+  sessions Session[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Cat {
+  id              String          @id @default(cuid())
+  name            String
+  ageMonths       Int?
+  sex             String
+
+  city           String          @default("Tijuana")
+  neighborhood   String
+
+  shortDescription String
+  fullDescription  String
+
+  sterilized        Boolean       @default(false)
+  vaccinesUpToDate  Boolean       @default(false)
+  dewormed          Boolean       @default(false)
+
+  // Public rescuer contact info (must be filled via public form)
+  rescuerName     String
+  rescuerPhone    String
+  rescuerEmail    String?
+
+  adoptionStatus  String  @default("AVAILABLE")
+  reviewStatus    String    @default("PENDING")
+
+  photos          PetPhoto[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model PetPhoto {
+  id        String   @id @default(cuid())
+  url       String
+  isPrimary Boolean  @default(false)
+  catId     String
+  cat       Cat      @relation(fields: [catId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+

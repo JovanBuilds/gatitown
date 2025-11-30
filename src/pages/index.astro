@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CatGallery from '../components/cats/CatGallery';
+import PublicCatForm from '../components/cats/PublicCatForm';
+---
+
+<Layout title="GatiTown - Adopta un gatito en Tijuana">
+  <!-- Hero Section -->
+  <section id="hero" class="min-h-screen bg-[#FFF4EA] flex items-center justify-center px-6 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-[#9A7B6A] mb-4">
+        Adopta un gatito en Tijuana
+      </h1>
+      <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+        Conecta con gatos rescatados y encuentra a tu compañero ideal.
+      </p>
+      <a
+        href="#gatos"
+        class="inline-block bg-[#A8D8E8] hover:bg-[#F7C8B6] text-gray-900 font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+      >
+        Ver gatitos
+      </a>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gatos" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#9A7B6A] text-center mb-12">
+        Gatitos en adopción
+      </h2>
+      <CatGallery client:load />
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section id="como-funciona" class="py-20 bg-[#FFF4EA]">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#9A7B6A] text-center mb-12">
+        ¿Cómo funciona?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-[#A8D8E8] rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+            🔍
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Encuentra</h3>
+          <p class="text-gray-600">Explora los perfiles de los gatitos disponibles.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-[#A8D8E8] rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+            📝
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Contacta</h3>
+          <p class="text-gray-600">Comunícate con el rescatista del gatito.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-[#A8D8E8] rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+            🏡
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Conoce</h3>
+          <p class="text-gray-600">Visita al gatito o coordina una videollamada.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-[#A8D8E8] rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+            ❤️
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Adopta</h3>
+          <p class="text-gray-600">Lleva a tu nuevo amigo a casa y dales amor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publish Form Section -->
+  <section id="publicar" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <PublicCatForm client:load />
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="acerca" class="py-20 bg-[#FFF4EA]">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#9A7B6A] mb-6">
+        Acerca de GatiTown
+      </h2>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        GatiTown es una iniciativa nacida en Tijuana para conectar a gatitos rescatados con familias amorosas.
+        Trabajamos con rescatistas independientes y refugios locales para dar visibilidad a estos pequeños que buscan una segunda oportunidad.
+        Nuestra misión es fomentar la adopción responsable y reducir la población de gatos en situación de calle.
+      </p>
+    </div>
+  </section>
+</Layout>

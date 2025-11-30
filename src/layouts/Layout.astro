@@ -1,0 +1,136 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const user = Astro.locals.user;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Adopta un gatito rescatado en Tijuana" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-2xl font-bold text-[#9A7B6A]"> GatiTown </a>
+          <nav class="hidden md:flex items-center gap-8">
+            <a
+              href="/#gatos"
+              class="text-gray-700 hover:text-[#9A7B6A] transition-colors font-medium"
+            >
+              Gatos
+            </a>
+            <a
+              href="/#como-funciona"
+              class="text-gray-700 hover:text-[#9A7B6A] transition-colors font-medium"
+            >
+              Cómo funciona
+            </a>
+            <a
+              href="/#acerca"
+              class="text-gray-700 hover:text-[#9A7B6A] transition-colors font-medium"
+            >
+              Acerca
+            </a>
+            {
+              !user && (
+                <a
+                  href="/auth/login"
+                  class="border-2 border-[#A8D8E8] text-gray-700 hover:bg-[#A8D8E8] hover:text-gray-900 font-semibold px-6 py-2 rounded-xl transition-colors"
+                >
+                  Iniciar sesión
+                </a>
+              )
+            }
+            {
+              user && (
+                <a
+                  href="/admin"
+                  class="border-2 border-[#9A7B6A] text-[#9A7B6A] hover:bg-[#9A7B6A] hover:text-white font-semibold px-6 py-2 rounded-xl transition-colors"
+                >
+                  Panel Admin
+                </a>
+              )
+            }
+            <a
+              href="/#publicar"
+              class="bg-[#A8D8E8] hover:bg-[#F7C8B6] text-gray-900 font-semibold px-6 py-2 rounded-xl transition-colors"
+            >
+              Quiero adoptar
+            </a>
+          </nav>
+          <button class="md:hidden text-gray-700" id="mobile-menu-btn">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <slot />
+
+    <!-- Footer -->
+    <footer class="bg-[#9A7B6A] text-white py-12">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <p class="text-lg">© 2025 GatiTown — Tijuana, Baja California</p>
+      </div>
+    </footer>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const nav = document.querySelector("nav");
+
+      mobileMenuBtn?.addEventListener("click", () => {
+        nav?.classList.toggle("hidden");
+        nav?.classList.toggle("flex");
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif;
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminDashboard from "../../components/admin/AdminDashboard";
+
+const user = Astro.locals.user;
+
+if (!user || user.role !== "ADMIN") {
+  return Astro.redirect("/auth/login");
+}
+---
+
+<Layout title="Admin - GatiTown">
+  <div class="min-h-screen bg-[#FFF4EA] py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-8 flex items-center justify-between">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-[#9A7B6A] mb-2">
+            Panel de gatitos
+          </h1>
+          <p class="text-gray-600">
+            Gestiona las solicitudes de adopción y el estado de los gatitos
+          </p>
+        </div>
+        <form action="/api/auth/logout" method="POST">
+          <button
+            type="submit"
+            class="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-semibold px-6 py-2 rounded-xl transition-colors"
+          >
+            Cerrar sesión
+          </button>
+        </form>
+      </div>
+      <AdminDashboard client:load />
+    </div>
+  </div>
+</Layout>
